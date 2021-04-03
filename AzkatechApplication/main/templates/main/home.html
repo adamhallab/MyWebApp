@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% block title %} 
+Home 
+{% endblock %}
+
+{% block content %}
+{% for vac in user.vacation.all %}
+    <ul>
+        <li>
+        {{vac.description}}
+        <ul>
+            <li>
+            {{vac.start_date}}
+            </li>
+            <li>
+            {{vac.end_date}}
+            </li>
+            <li>
+            Vacation Duration: {{ vac.end_date|timeuntil:vac.start_date }}
+            </li>
+            <li>
+            <a href="{% url 'main:vac_delete' pk=vac.id%}"><button>Delete Vacation</button></a>
+            <a href="{% url 'main:vac_update' pk=vac.id%}"><button>Edit Vacation</button></a>
+            </li>
+        </ul>
+    </ul>
+{% endfor %}
+  <a href="/add"><button>Add New Vacation</button></a>
+{% endblock %}
